@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nafisat Oladipo — UX Designer for Wellness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage: #8aab8e;
+      --sage-light: #b8d1bb;
+      --sage-pale: #eaf2eb;
+      --sand: #e8ddd0;
+      --sand-dark: #c8b89a;
+      --cream: #faf8f4;
+      --warm-dark: #2c2820;
+      --muted: #7a7268;
+      --accent: #c4855a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--warm-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(250, 248, 244, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(138,171,142,0.15);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 400; letter-spacing: 0.04em;
+      color: var(--warm-dark); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--sage); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -10%; right: -5%;
+      width: 55vw; height: 90vh;
+      background: radial-gradient(ellipse at 60% 40%, var(--sage-pale) 0%, transparent 70%),
+                  radial-gradient(ellipse at 30% 70%, var(--sand) 0%, transparent 60%);
+      border-radius: 50% 30% 60% 40% / 40% 50% 50% 60%;
+      z-index: 0; pointer-events: none;
+      animation: morphBlob 12s ease-in-out infinite alternate;
+    }
+    @keyframes morphBlob {
+      0%   { border-radius: 50% 30% 60% 40% / 40% 50% 50% 60%; transform: rotate(0deg) scale(1); }
+      100% { border-radius: 30% 60% 40% 50% / 60% 40% 60% 40%; transform: rotate(8deg) scale(1.04); }
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow {
+      font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1.2rem;
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.01em;
+      opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+    }
+    .hero-name em { font-style: italic; color: var(--sage); }
+    .hero-tagline {
+      margin-top: 1.8rem; max-width: 440px;
+      font-size: 1.05rem; line-height: 1.75; color: var(--muted); font-weight: 300;
+      opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+    }
+    .hero-cta {
+      margin-top: 2.8rem; display: flex; gap: 1rem; align-items: center;
+      opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
+    }
+    .btn-primary {
+      display: inline-block; padding: 0.85rem 2rem;
+      background: var(--warm-dark); color: var(--cream);
+      text-decoration: none; font-size: 0.85rem; letter-spacing: 0.06em;
+      border-radius: 50px; transition: all 0.3s;
+    }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block; padding: 0.85rem 1.6rem;
+      color: var(--muted); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 0.05em;
+      border: 1px solid var(--sand-dark); border-radius: 50px;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover { border-color: var(--sage); color: var(--sage); transform: translateY(-2px); }
+
+    .hero-visual { position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; }
+    .hero-card {
+      background: white; border-radius: 24px;
+      padding: 2.4rem; max-width: 320px; width: 100%;
+      box-shadow: 0 24px 64px rgba(44,40,32,0.1);
+      opacity: 0; animation: fadeUp 1s 0.7s forwards;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: var(--sage-pale); color: var(--sage);
+      font-size: 0.75rem; padding: 0.35rem 0.8rem;
+      border-radius: 50px; letter-spacing: 0.04em;
+    }
+    .hero-card-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400;
+      margin-bottom: 1rem; color: var(--muted); font-style: italic;
+    }
+    .hero-card-stat { margin-top: 1.6rem; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem; font-weight: 300; line-height: 1; color: var(--warm-dark);
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.04em; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SKILLS STRIP ── */
+    .skills-strip {
+      background: var(--warm-dark); color: var(--cream);
+      padding: 1.2rem 0; overflow: hidden;
+    }
+    .skills-track {
+      display: flex; gap: 3rem; white-space: nowrap;
+      animation: scrollTrack 22s linear infinite;
+    }
+    .skills-track span {
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sage-light); flex-shrink: 0;
+    }
+    .skills-track span.dot { color: var(--accent); }
+    @keyframes scrollTrack { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 7rem 4rem; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.15;
+    }
+    .section-title em { font-style: italic; }
+
+    /* ── ABOUT ── */
+    .about { background: var(--sage-pale); }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 6rem; align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .about-left .section-title { margin-bottom: 1.8rem; }
+    .about-body { font-size: 1rem; line-height: 1.85; color: var(--muted); font-weight: 300; }
+    .about-body p + p { margin-top: 1rem; }
+    .about-right {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem;
+    }
+    .about-stat-card {
+      background: white; border-radius: 18px; padding: 1.8rem;
+      box-shadow: 0 4px 20px rgba(44,40,32,0.06);
+    }
+    .about-stat-card .num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300;
+      line-height: 1; color: var(--warm-dark);
+    }
+    .about-stat-card .lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; }
+    .about-stat-card.accent { background: var(--warm-dark); }
+    .about-stat-card.accent .num, .about-stat-card.accent .lbl { color: var(--sage-light); }
+
+    /* ── WORK ── */
+    .work-header { max-width: 1100px; margin: 0 auto 4rem; }
+    .work-header .section-title { margin-top: 0.6rem; }
+    .work-header p { margin-top: 1rem; color: var(--muted); font-size: 1rem; max-width: 500px; line-height: 1.7; }
+
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 1.6rem; max-width: 1100px; margin: 0 auto;
+    }
+    .project-card {
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 6px 28px rgba(44,40,32,0.07);
+      transition: transform 0.35s, box-shadow 0.35s;
+      cursor: default;
+    }
+    .project-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(44,40,32,0.13); }
+    .project-card:nth-child(1) .card-visual { background: linear-gradient(135deg, #d4e8d6 0%, #b8d1bb 100%); }
+    .project-card:nth-child(2) .card-visual { background: linear-gradient(135deg, #e8ddd0 0%, #d4c4b0 100%); }
+    .project-card:nth-child(3) .card-visual { background: linear-gradient(135deg, #d8d0e8 0%, #c4b8d8 100%); }
+    .project-card:nth-child(4) .card-visual { background: linear-gradient(135deg, #e8d8c8 0%, #d4b898 100%); }
+    .card-visual {
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .card-visual-icon {
+      font-size: 3.5rem; opacity: 0.6;
+      transition: transform 0.4s;
+    }
+    .project-card:hover .card-visual-icon { transform: scale(1.15) rotate(-4deg); }
+    .card-year {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(6px);
+      font-size: 0.72rem; padding: 0.3rem 0.7rem; border-radius: 50px;
+      color: var(--warm-dark); letter-spacing: 0.06em;
+    }
+    .card-body { padding: 1.8rem; }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; font-weight: 400; margin-bottom: 0.7rem;
+    }
+    .card-desc { font-size: 0.9rem; line-height: 1.7; color: var(--muted); font-weight: 300; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.2rem; }
+    .card-tag {
+      font-size: 0.7rem; padding: 0.25rem 0.65rem;
+      border: 1px solid var(--sand-dark); border-radius: 50px;
+      color: var(--muted); letter-spacing: 0.04em;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--warm-dark); color: var(--cream);
+      text-align: center; padding: 8rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
+      width: 80vw; height: 80vw; max-width: 700px; max-height: 700px;
+      background: radial-gradient(circle, rgba(138,171,142,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .cta-label { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 1.2rem; }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 300; line-height: 1.15;
+      margin-bottom: 1.6rem;
+    }
+    .cta-title em { font-style: italic; color: var(--sage-light); }
+    .cta-body { color: rgba(250,248,244,0.6); font-size: 1rem; line-height: 1.8; font-weight: 300; margin-bottom: 2.8rem; }
+    .btn-cta {
+      display: inline-block; padding: 1rem 2.6rem;
+      background: var(--sage); color: white;
+      text-decoration: none; font-size: 0.88rem; letter-spacing: 0.06em;
+      border-radius: 50px; transition: all 0.3s;
+    }
+    .btn-cta:hover { background: var(--sage-light); color: var(--warm-dark); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(138,171,142,0.3); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--warm-dark); color: rgba(250,248,244,0.35);
+      padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.8rem;
+    }
+    footer a { color: rgba(250,248,244,0.35); text-decoration: none; }
+    footer a:hover { color: var(--sage-light); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 2rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; gap: 3rem; }
+      .hero-visual { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 5rem 2rem; }
+      footer { flex-direction: column; gap: 0.8rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Nafisat Oladipo</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">UX Designer for Wellness</p>
+      <h1 class="hero-name">Hi, I'm<br/><em>Nafisat</em><br/>Oladipo</h1>
+      <p class="hero-tagline">I design digital experiences that help wellness founders turn their vision into reality — intuitive, calming interfaces that make clients feel safe, understood, and ready to take the next step.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Start a Conversation</a>
+        <a href="#work" class="btn-ghost">View Work</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <p class="hero-card-title">What I do</p>
+        <div class="tags">
+          <span class="tag">User Research</span>
+          <span class="tag">Mobile Apps</span>
+          <span class="tag">Wellness Design</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Empathy-Driven</span>
+        </div>
+        <div class="hero-card-stat">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Wellness founders helped in 2025–2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCROLLING STRIP -->
+  <div class="skills-strip">
+    <div class="skills-track">
+      <span>User Research</span><span class="dot">✦</span>
+      <span>Mobile UX</span><span class="dot">✦</span>
+      <span>Wellness Design</span><span class="dot">✦</span>
+      <span>Figma</span><span class="dot">✦</span>
+      <span>Empathy-Driven Design</span><span class="dot">✦</span>
+      <span>Booking Systems</span><span class="dot">✦</span>
+      <span>Telehealth</span><span class="dot">✦</span>
+      <span>Class Scheduling</span><span class="dot">✦</span>
+      <span>Coaching Platforms</span><span class="dot">✦</span>
+      <span>Privacy-First UX</span><span class="dot">✦</span>
+      <!-- duplicate for infinite scroll -->
+      <span>User Research</span><span class="dot">✦</span>
+      <span>Mobile UX</span><span class="dot">✦</span>
+      <span>Wellness Design</span><span class="dot">✦</span>
+      <span>Figma</span><span class="dot">✦</span>
+      <span>Empathy-Driven Design</span><span class="dot">✦</span>
+      <span>Booking Systems</span><span class="dot">✦</span>
+      <span>Telehealth</span><span class="dot">✦</span>
+      <span>Class Scheduling</span><span class="dot">✦</span>
+      <span>Coaching Platforms</span><span class="dot">✦</span>
+      <span>Privacy-First UX</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-left">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">Designing with <em>care</em> at the core</h2>
+        <div class="about-body">
+          <p>I know how overwhelming it can feel when you're pouring your heart into helping others heal, but your app or website isn't connecting the way you hoped.</p>
+          <p>That's where I come in. I create intuitive, calming interfaces that make your clients feel safe, understood, and excited to take the next step in their wellness journey.</p>
+          <p>Because when your digital presence works seamlessly, you can focus on what you do best — transforming lives.</p>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="about-stat-card">
+          <div class="num">4</div>
+          <div class="lbl">Wellness projects delivered</div>
+        </div>
+        <div class="about-stat-card accent">
+          <div class="num">100%</div>
+          <div class="lbl">Client satisfaction focus</div>
+        </div>
+        <div class="about-stat-card">
+          <div class="num">2+</div>
+          <div class="lbl">Years in wellness UX</div>
+        </div>
+        <div class="about-stat-card">
+          <div class="num">∞</div>
+          <div class="lbl">Empathy-driven decisions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="work-header">
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title">Real projects for <em>real</em> wellness founders</h2>
+      <p>Who needed their digital presence to match the care they provide.</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="card-visual">
+          <span class="card-visual-icon">🧘</span>
+          <span class="card-year">2026</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Mindful Moments App</h3>
+          <p class="card-desc">Helped a meditation coach simplify her booking chaos into a peaceful, user-friendly app that her clients actually enjoy using. No more missed sessions or confusing payment flows.</p>
+          <div class="card-tags">
+            <span class="card-tag">Meditation</span>
+            <span class="card-tag">Mobile App</span>
+            <span class="card-tag">Booking System</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-visual">
+          <span class="card-visual-icon">🌿</span>
+          <span class="card-year">2026</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Flow Yoga Studio</h3>
+          <p class="card-desc">Transformed a struggling yoga studio's website into a calming digital sanctuary that makes booking classes feel as relaxing as the practice itself. Client retention increased significantly.</p>
+          <div class="card-tags">
+            <span class="card-tag">Yoga</span>
+            <span class="card-tag">Website Design</span>
+            <span class="card-tag">Class Scheduling</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-visual">
+          <span class="card-visual-icon">💜</span>
+          <span class="card-year">2025</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Healing Space Therapy</h3>
+          <p class="card-desc">Designed a safe, confidential platform for a therapist whose clients needed easier access to care. Created an experience that removes barriers while maintaining trust and warmth of in-person sessions.</p>
+          <div class="card-tags">
+            <span class="card-tag">Mental Health</span>
+            <span class="card-tag">Telehealth</span>
+            <span class="card-tag">Privacy-First</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-visual">
+          <span class="card-visual-icon">🥗</span>
+          <span class="card-year">2025</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Nourish Nutrition Portal</h3>
+          <p class="card-desc">Built a personalized nutrition coaching platform that makes complex meal planning feel simple and achievable. Clients now stay engaged throughout their entire wellness journey.</p>
+          <div class="card-tags">
+            <span class="card-tag">Nutrition</span>
+            <span class="card-tag">Coaching Platform</span>
+            <span class="card-tag">Personalization</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="cta-inner">
+      <p class="cta-label">Let's Work Together</p>
+      <h2 class="cta-title">Let's Bring Your <em>Vision</em> to Life</h2>
+      <p class="cta-body">If you're a wellness founder who's been putting off fixing your website or app because it feels too overwhelming — I get it. Let's have a conversation about how we can make your digital experience as healing as the work you do.</p>
+      <a href="mailto:hello@nafisatoladipo.com" class="btn-cta">Start a Conversation</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Nafisat Oladipo. All rights reserved.</span>
+    <span>Designed & built with care</span>
+  </footer>
+
+</body>
+</html>
